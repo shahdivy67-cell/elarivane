@@ -11,11 +11,16 @@ import {
   Share2,
   HelpCircle,
   Lightbulb,
-  ArrowRight
+  ArrowRight,
+  Gamepad2
 } from 'lucide-react';
 import { SimulatorItem } from '../types/simulator';
 import { evaluateSimulationModel, EvaluationResult } from '../utils/simulationEvaluator';
 import { useApp } from '../context/AppContext';
+import { TrustArenaGame } from './simulators/TrustArenaGame';
+import { MyceliumForestGame } from './simulators/MyceliumForestGame';
+import { GravityOrbiterGame } from './simulators/GravityOrbiterGame';
+import { DopamineSynapseGame } from './simulators/DopamineSynapseGame';
 
 interface SimulatorPlayerModalProps {
   simulator: SimulatorItem;
@@ -167,6 +172,31 @@ export const SimulatorPlayerModal: React.FC<SimulatorPlayerModalProps> = ({
                   </p>
                 </div>
               </div>
+
+              {/* Direct Hands-on Interactive Game Engines when applicable */}
+              {simulator.id === 'sim_prisoner_dilemma' && (
+                <div className="pt-1">
+                  <TrustArenaGame onFinishLesson={handleFinishSimulation} />
+                </div>
+              )}
+
+              {simulator.id === 'sim_tragedy_commons' && (
+                <div className="pt-1">
+                  <MyceliumForestGame onFinishLesson={handleFinishSimulation} />
+                </div>
+              )}
+
+              {simulator.id === 'sim_orbit_gravity_balance' && (
+                <div className="pt-1">
+                  <GravityOrbiterGame onFinishLesson={handleFinishSimulation} />
+                </div>
+              )}
+
+              {simulator.id === 'sim_dopamine_adaptation' && (
+                <div className="pt-1">
+                  <DopamineSynapseGame onFinishLesson={handleFinishSimulation} />
+                </div>
+              )}
 
               {/* Dynamic Real-Time Simulation Feedback Panel */}
               <div className="bg-[#0c140f] border border-emerald-950/80 rounded-2xl p-4 space-y-4">
