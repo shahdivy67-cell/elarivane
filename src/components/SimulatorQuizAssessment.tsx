@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CheckCircle2, XCircle, Award, HelpCircle, ArrowRight, RotateCcw } from 'lucide-react';
+import { CheckCircle2, XCircle, Award, HelpCircle, ArrowRight, RotateCcw, Sparkles } from 'lucide-react';
 import { QuizQuestion } from '../types/visualSimulator';
 
 interface SimulatorQuizAssessmentProps {
@@ -56,6 +56,7 @@ export const SimulatorQuizAssessment: React.FC<SimulatorQuizAssessmentProps> = (
   }, 0);
 
   const allThreeAnswered = hasSubmittedAnswer.every(Boolean);
+  const potentialXp = calculatedScore * 10;
 
   if (isAssessmentDone) {
     return (
@@ -71,10 +72,22 @@ export const SimulatorQuizAssessment: React.FC<SimulatorQuizAssessmentProps> = (
           <h3 className="text-xl font-serif font-bold text-white">{simulatorTitle}</h3>
           <p className="text-sm text-stone-300">
             {isReviewMode ? (
-              <span>Review Mode: Original record was {previousScore}/3</span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-stone-900 border border-stone-700 text-stone-300 text-xs">
+                Review Mode: Previously recorded {previousScore ?? 0}/3 correct (+{(previousScore ?? 0) * 10} XP already archived)
+              </span>
             ) : (
-              <span>Your Final Score: <strong className="text-emerald-400 font-mono text-base">{calculatedScore} / 3 Correct</strong></span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-950/80 border border-emerald-600/50 text-emerald-200 text-sm font-semibold">
+                <Sparkles className="w-4 h-4 text-emerald-400" />
+                {calculatedScore}/3 correct · +{potentialXp} XP earned
+              </span>
             )}
+          </p>
+          <p className="text-xs text-stone-300 max-w-md mx-auto pt-1">
+            {calculatedScore === 3
+              ? 'Flawless concept mastery! You demonstrated complete comprehension of the foundational principles.'
+              : calculatedScore >= 1
+              ? 'Good effort! Review the explanations below to solidify the lessons you encountered during practice.'
+              : 'Review the explanations below and return to the practical simulator to explore the physical reactions again.'}
           </p>
         </div>
 

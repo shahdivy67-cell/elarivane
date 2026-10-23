@@ -13,7 +13,6 @@ export const BADGES_LIST: Badge[] = [
     name: 'First Light',
     description: 'Completed your very first offline real-world mission.',
     icon: '🌱',
-    unlockedAt: '2026-09-12',
     category: 'presence'
   },
   {
@@ -21,7 +20,6 @@ export const BADGES_LIST: Badge[] = [
     name: 'Quiet Kettle',
     description: 'Took unhurried pauses to brew and breathe without a screen.',
     icon: '🍵',
-    unlockedAt: '2026-09-18',
     category: 'presence'
   },
   {
@@ -29,7 +27,6 @@ export const BADGES_LIST: Badge[] = [
     name: 'Tricolor Painter',
     description: 'Created 3 self-contained minimalist landscapes with limited palettes.',
     icon: '🎨',
-    unlockedAt: '2026-09-24',
     category: 'craft'
   },
   {
@@ -37,7 +34,6 @@ export const BADGES_LIST: Badge[] = [
     name: 'Harmonic Resonance',
     description: 'Explored pentatonic sound chimes and sand ripples.',
     icon: '🔔',
-    unlockedAt: '2026-10-02',
     category: 'craft'
   },
   {
@@ -45,7 +41,6 @@ export const BADGES_LIST: Badge[] = [
     name: 'Curious Stargazer',
     description: 'Unlocked explanations of the Moon illusion and cosmic phenomena.',
     icon: '🌖',
-    unlockedAt: '2026-10-10',
     category: 'curiosity'
   },
   {
@@ -60,7 +55,6 @@ export const BADGES_LIST: Badge[] = [
     name: 'Gentle Companion',
     description: 'Shared an offline walk or mindful moment with a friend.',
     icon: '🌿',
-    unlockedAt: '2026-10-15',
     category: 'fellowship'
   },
   {

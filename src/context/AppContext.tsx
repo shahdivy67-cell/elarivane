@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Activity, ActivityCompletion, Friend, Challenge, UserProfile } from '../types';
 import { INITIAL_USER_PROFILE, INITIAL_ACTIVITIES, INITIAL_FRIENDS, INITIAL_CHALLENGES, generateInitialHistory } from '../data/initialData';
+import { runOneTimeDataIntegrityAudit, getDeterministicTotalXp } from '../utils/xpLedger';
 import confetti from 'canvas-confetti';
 
 interface AppContextType {
@@ -77,6 +78,10 @@ const LEGACY_STORAGE_KEY_CHALLENGES = 'elarivane_challenges_v1';
 const LEGACY_STORAGE_KEY_OFFLINE_QUEUE = 'elarivane_offline_queue_v1';
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  // Execute one-time XP & data integrity audit to permanently clear fake demo data and reset XP to 0
+  useEffect(() => {
+    runOneTimeDataIntegrityAudit();
+  }, []);
   // Load State from LocalStorage with backward-compatible migration
   const [user, setUser] = useState<UserProfile>(() => {
     try {
@@ -241,8 +246,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const savedActivities = activities.filter(a => user.savedActivityIds.includes(a.id));
 
-  // XP calculations
-  const totalXp = history.reduce((sum, item) => sum + (item.xpEarned || 0), 0);
+  // Deterministic XP derived exclusively from quiz assessment ledger
+  const [totalXp, setTotalXp] = useState<number>(() => getDeterministicTotalXp());
+
+  // Listen for storage changes or updates to sync totalXp reactively
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setTotalXp(getDeterministicTotalXp());
+    };
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
 
   // Complete an activity
   const completeActivity = (

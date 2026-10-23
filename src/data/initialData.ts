@@ -5,9 +5,9 @@ export const INITIAL_USER_PROFILE: UserProfile = {
   displayName: 'Divy Shah',
   handle: 'divyshah',
   avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80',
-  bio: 'Swapping mindless doomscrolling for analog sketchbooks, neighborhood walks, and stargazing.',
-  joinedDate: '2026-09-12',
-  interests: ['35mm Film', 'Mindful Walking', 'Ceramics', 'Cosmology', 'Botanicals'],
+  bio: 'Focusing on mindful craft, physical presence, and visual skill simulators.',
+  joinedDate: '2026-10-23',
+  interests: ['Ceramics', 'Mindful Walking', 'Permaculture', 'Analog Craft'],
   privacy: {
     profileVisibility: 'friends-only',
     showActivityHeatmap: true,
@@ -15,7 +15,7 @@ export const INITIAL_USER_PROFILE: UserProfile = {
   },
   settings: {
     notifications: {
-      dailyGentleNudge: false, // Low pressure!
+      dailyGentleNudge: false,
       friendActivity: true,
       invitations: true,
       newCuriosities: true,
@@ -26,7 +26,7 @@ export const INITIAL_USER_PROFILE: UserProfile = {
     reducedMotion: false,
     theme: 'dark-emerald',
   },
-  savedActivityIds: ['godo_walk_detail', 'play_3color', 'curio_moon'],
+  savedActivityIds: ['godo_walk_detail', 'play_3color'],
 };
 
 export const INITIAL_ACTIVITIES: Activity[] = [
@@ -38,7 +38,7 @@ export const INITIAL_ACTIVITIES: Activity[] = [
     title: 'The Unnoticed Micro-Detail',
     subtitle: '10-minute neighbourhood observation walk',
     durationMinutes: 10,
-    xpReward: 35,
+    xpReward: 0,
     description: 'Step outside without earphones. Spot and photograph one architectural, botanical, or textural detail you walk past every day but never actually registered before.',
     stepGuide: [
       'Leave your keys and earphones at the door. Just carry your pocket notebook or camera.',
@@ -57,7 +57,7 @@ export const INITIAL_ACTIVITIES: Activity[] = [
     title: 'Single-Sip Tea Meditation',
     subtitle: '5 minutes of unhurried warm brew',
     durationMinutes: 5,
-    xpReward: 20,
+    xpReward: 0,
     description: 'Brew warm tea, herbal tisane, or hot water with lemon. Sip without looking at any screen or multitasking.',
     stepGuide: [
       'Boil water and listen to the kettle murmur and boil.',
@@ -75,7 +75,7 @@ export const INITIAL_ACTIVITIES: Activity[] = [
     title: 'Spontaneous Gratitude Note',
     subtitle: 'Send genuine appreciation to a friend',
     durationMinutes: 6,
-    xpReward: 30,
+    xpReward: 0,
     description: 'Send a heartfelt 3-sentence message to someone who made an impact on you recently, telling them exactly what you admire or thank them for.',
     stepGuide: [
       'Think of a person whose company or deed brought you peace this month.',
@@ -92,7 +92,7 @@ export const INITIAL_ACTIVITIES: Activity[] = [
     title: 'Skyward Spine & Hip Reset',
     subtitle: '8-minute midday somatic decompression',
     durationMinutes: 8,
-    xpReward: 25,
+    xpReward: 0,
     description: 'A gentle non-workout sequence to untie tech-neck, open ribcage breathing, and stimulate blood flow to your extremities.',
     stepGuide: [
       'Stand barefoot or in soft socks. Roll your shoulders up, back, and down 6 times.',
@@ -110,7 +110,7 @@ export const INITIAL_ACTIVITIES: Activity[] = [
     title: 'Pocket Origami Crane or Boat',
     subtitle: 'Fold scrap paper into tactile geometry',
     durationMinutes: 7,
-    xpReward: 25,
+    xpReward: 0,
     description: 'Grab a square sheet from an old receipt, flyer, or notepad and transform 2D paper into a clean miniature sculpture.',
     stepGuide: [
       'Cut or tear any rectangular scrap into an exact square.',
@@ -130,7 +130,7 @@ export const INITIAL_ACTIVITIES: Activity[] = [
     title: '3-Color Micro Landscape',
     subtitle: 'Low-pressure miniature canvas sketch',
     durationMinutes: 5,
-    xpReward: 30,
+    xpReward: 0,
     description: 'Compose a tiny atmospheric landscape using only three hand-picked shades: a horizon, an ambient sky, and a foreground silhouette.',
     stepGuide: [
       'Select your 3 muted botanical hues.',
@@ -149,7 +149,7 @@ export const INITIAL_ACTIVITIES: Activity[] = [
     title: 'Tessellation & Zen Garden Rake',
     subtitle: 'Geometric ripple and soothing sand tracks',
     durationMinutes: 4,
-    xpReward: 25,
+    xpReward: 0,
     description: 'Drag your finger across a bed of virtual Japanese raked sand to generate calming harmonic ripples and concentric waves.',
     stepGuide: [
       'Gently glide across the virtual sand garden canvas.',
@@ -166,7 +166,7 @@ export const INITIAL_ACTIVITIES: Activity[] = [
     title: 'Pentatonic Ambient Chimes',
     subtitle: 'Harmonic wind bells tuned to 432Hz calm',
     durationMinutes: 4,
-    xpReward: 25,
+    xpReward: 0,
     description: 'Touch floating bamboo and bronze bells that resonate in a harmonic pentatonic scale where every note blends into pure concord.',
     stepGuide: [
       'Tap any floating bell to ring a crystalline resonant tone.',
@@ -185,7 +185,7 @@ export const INITIAL_ACTIVITIES: Activity[] = [
     title: 'The Moon Horizon Illusion',
     subtitle: 'Why the full moon seems enormous low down',
     durationMinutes: 3,
-    xpReward: 30,
+    xpReward: 0,
     description: 'Ever wondered why the moon looks gigantic when rising over city roofs, but tiny overhead? Test the Ponzo illusion with your own eyes.',
     stepGuide: [
       'Understand the Ponzo & Ebbinghaus optical perspective effect.',
@@ -207,7 +207,7 @@ export const INITIAL_ACTIVITIES: Activity[] = [
     title: 'Wood Wide Web Network Puzzle',
     subtitle: 'How forest trees trade sugars and warnings',
     durationMinutes: 4,
-    xpReward: 35,
+    xpReward: 0,
     description: 'Under every forest floor lies a mycorrhizal fungal highway. Connect 4 mother trees to seedling saplings through fungal hyphae without crossing wires.',
     stepGuide: [
       'Learn how older "Mother Trees" nurse shaded young saplings with carbon.',
@@ -228,7 +228,7 @@ export const INITIAL_ACTIVITIES: Activity[] = [
     title: 'The Philosophy of Kintsugi',
     subtitle: 'Golden joinery and the grace of brokenness',
     durationMinutes: 3,
-    xpReward: 25,
+    xpReward: 0,
     description: 'Explore the 15th-century Japanese art of mending broken pottery with lacquer dusted with powdered gold, silver, or platinum.',
     stepGuide: [
       'Discover the connection between wabi-sabi and Kintsugi (金継ぎ).',
@@ -244,112 +244,13 @@ export const INITIAL_ACTIVITIES: Activity[] = [
   }
 ];
 
-export const INITIAL_FRIENDS: Friend[] = [
-  {
-    id: 'f_elena',
-    name: 'Elena Rostova',
-    handle: 'elenar',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=250&q=80',
-    bio: 'Watercolor hobbyist & weekend trail wanderer. Leaving Instagram behind for paper sketchbooks.',
-    isOnline: true,
-    status: 'friend',
-    sharedActivitiesCount: 14,
-    lastActive: 'Just now',
-    currentActivity: 'Walking the dog along the canal',
-  },
-  {
-    id: 'f_julian',
-    name: 'Julian Vance',
-    handle: 'julianv',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=250&q=80',
-    bio: 'Tea brewer, bread baker, vinyl collector.',
-    isOnline: true,
-    status: 'friend',
-    sharedActivitiesCount: 9,
-    lastActive: '12m ago',
-    currentActivity: 'Brewing sencha & journaling',
-  },
-  {
-    id: 'f_maya',
-    name: 'Maya Chen',
-    handle: 'mayac',
-    avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=250&q=80',
-    bio: 'Botany enthusiast & film photographer. Looking for real world color.',
-    isOnline: false,
-    status: 'friend',
-    sharedActivitiesCount: 6,
-    lastActive: '2h ago',
-  },
-  {
-    id: 'f_soren',
-    name: 'Soren Lind',
-    handle: 'sorenl',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80',
-    bio: 'Woodworking & analog synthesizer tinkerer.',
-    isOnline: false,
-    status: 'pending_incoming',
-    sharedActivitiesCount: 0,
-    lastActive: '1d ago',
-  }
-];
+// Clean empty friends list without fabricated accounts or fake presence
+export const INITIAL_FRIENDS: Friend[] = [];
 
-export const INITIAL_CHALLENGES: Challenge[] = [
-  {
-    id: 'c_autumn_air',
-    title: 'Fresh Air Circle',
-    description: 'Together with 3 friends, take five 10-minute walks without phones this week.',
-    goalCount: 5,
-    currentCount: 3,
-    deadline: 'In 3 days',
-    participants: [
-      { id: 'me_01', name: 'Divy', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80', contributed: 2 },
-      { id: 'f_elena', name: 'Elena', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=250&q=80', contributed: 1 },
-    ],
-    isJoined: true,
-  },
-  {
-    id: 'c_analog_sketch',
-    title: 'Doodle Co-op',
-    description: 'Make 4 low-pressure micro drawings using only 3 colors.',
-    goalCount: 4,
-    currentCount: 1,
-    deadline: 'In 5 days',
-    participants: [
-      { id: 'f_julian', name: 'Julian', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=250&q=80', contributed: 1 },
-    ],
-    isJoined: false,
-  }
-];
+// Clean empty challenges without fabricated progress
+export const INITIAL_CHALLENGES: Challenge[] = [];
 
-// Helper to generate past 4 months of realistic non-shame participation entries
+// Clean empty history - zero fake historical entries
 export function generateInitialHistory() {
-  const history: any[] = [];
-  const now = new Date();
-  
-  // Create sample entries over the last 90 days with realistic clusters
-  for (let i = 0; i < 90; i++) {
-    const d = new Date(now);
-    d.setDate(d.getDate() - i);
-    const dateKey = d.toISOString().split('T')[0];
-
-    // Probability of completing activities on day i
-    const rand = (i * 13 + 7) % 10;
-    if (rand > 3) {
-      const count = (i % 5 === 0) ? 3 : (i % 2 === 0 ? 2 : 1);
-      for (let c = 0; c < count; c++) {
-        history.push({
-          id: `hist_${i}_${c}`,
-          activityId: c === 0 ? 'godo_walk_detail' : (c === 1 ? 'play_3color' : 'curio_moon'),
-          activityTitle: c === 0 ? 'The Unnoticed Micro-Detail' : (c === 1 ? '3-Color Micro Landscape' : 'The Moon Horizon Illusion'),
-          path: c === 0 ? 'go-do' : (c === 1 ? 'play-unwind' : 'curiosity'),
-          category: c === 0 ? 'explore' : (c === 1 ? 'draw' : 'explainer'),
-          completedAt: d.toISOString(),
-          dateKey,
-          xpEarned: 25 + (c * 5),
-          durationMinutes: 10 - c * 2,
-        });
-      }
-    }
-  }
-  return history;
+  return [];
 }

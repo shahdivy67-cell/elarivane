@@ -26,6 +26,7 @@ import {
   recordSimulatorCompletion,
   isSimulatorCompleted
 } from '../utils/simulatorStorage';
+import { awardQuizXp } from '../utils/xpLedger';
 
 interface VisualSimulatorPlayerProps {
   simulator: SimulatorMetadata;
@@ -54,6 +55,13 @@ export const VisualSimulatorPlayerModal: React.FC<VisualSimulatorPlayerProps> = 
   };
 
   const handleFinishAssessment = (score: number, userAnswers: number[]) => {
+    // Award XP deterministically strictly if not reviewing
+    let earnedXp = 0;
+    if (!isReviewMode) {
+      const awardResult = awardQuizXp(simulator.id, simulator.title, score);
+      earnedXp = awardResult.awardedXp;
+    }
+
     // Record completion permanently
     recordSimulatorCompletion({
       simulatorId: simulator.id,
@@ -62,7 +70,7 @@ export const VisualSimulatorPlayerModal: React.FC<VisualSimulatorPlayerProps> = 
       completedAt: new Date().toISOString(),
       score,
       totalQuestions: 3,
-      xpEarned: simulator.xpReward + score * 10,
+      xpEarned: earnedXp,
       userAnswers,
       simulatorVersion: simulator.version,
       coreLessonSummary: simulator.coreLesson,

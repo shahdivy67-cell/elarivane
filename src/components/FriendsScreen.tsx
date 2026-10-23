@@ -347,11 +347,20 @@ export const FriendsScreen: React.FC = () => {
             Cooperative goals to do real-world things together. No public scoreboards or shame.
           </p>
 
-          {challenges.map(ch => (
-            <div
-              key={ch.id}
-              className="bg-[#121c17] border border-emerald-950/80 p-5 rounded-2xl space-y-4"
-            >
+          {challenges.length === 0 ? (
+            <div className="py-12 text-center text-stone-400 space-y-2 bg-[#121c17] p-8 rounded-2xl border border-emerald-950/60">
+              <Sparkles className="w-8 h-8 text-emerald-600/50 mx-auto" />
+              <p className="text-sm font-semibold text-stone-200">No active Group Circles.</p>
+              <p className="text-xs text-stone-300 max-w-sm mx-auto">
+                Group circles allow you and your friends to accomplish real-world missions together with cooperative milestones.
+              </p>
+            </div>
+          ) : (
+            challenges.map(ch => (
+              <div
+                key={ch.id}
+                className="bg-[#121c17] border border-emerald-950/80 p-5 rounded-2xl space-y-4"
+              >
               <div className="flex items-start justify-between">
                 <div>
                   <h3 className="text-base font-serif font-semibold text-white">{ch.title}</h3>
@@ -407,7 +416,8 @@ export const FriendsScreen: React.FC = () => {
                 </button>
               </div>
             </div>
-          ))}
+          ))
+          )}
         </div>
       )}
 
