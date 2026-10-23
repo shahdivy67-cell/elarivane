@@ -28,7 +28,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onOpenActivity, onNaviga
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse" />
             <span className="text-[11px] uppercase tracking-widest text-emerald-400 font-semibold font-mono">
-              Elarivane Presence
+              Alivane Presence
             </span>
           </div>
           <span className="text-xs text-stone-300 font-serif italic">

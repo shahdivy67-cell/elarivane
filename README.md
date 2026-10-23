@@ -1,6 +1,6 @@
-# Elarivane — Meaningful Real-World Presence
+# Alivane — Meaningful Real-World Presence
 
-Elarivane is a mobile-first web app that helps people replace unintentional Instagram scrolling with enjoyable things to do, make, learn, and share with friends.
+Alivane is a mobile-first web app that helps people replace unintentional reels scrolling with enjoyable things to do, make, learn, and share with friends.
 
 It is designed as an alternative you want to open — finite, purposeful, and easy to leave — avoiding screen-time tracker shaming and streak pressure.
 

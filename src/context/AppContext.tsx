@@ -60,17 +60,27 @@ interface AppContextType {
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-const STORAGE_KEY_USER = 'elarivane_user_v1';
-const STORAGE_KEY_HISTORY = 'elarivane_history_v1';
-const STORAGE_KEY_FRIENDS = 'elarivane_friends_v1';
-const STORAGE_KEY_CHALLENGES = 'elarivane_challenges_v1';
-const STORAGE_KEY_OFFLINE_QUEUE = 'elarivane_offline_queue_v1';
+const getStoredItem = (newKey: string, legacyKey: string) => {
+  return localStorage.getItem(newKey) || localStorage.getItem(legacyKey);
+};
+
+const STORAGE_KEY_USER = 'alivane_user_v1';
+const STORAGE_KEY_HISTORY = 'alivane_history_v1';
+const STORAGE_KEY_FRIENDS = 'alivane_friends_v1';
+const STORAGE_KEY_CHALLENGES = 'alivane_challenges_v1';
+const STORAGE_KEY_OFFLINE_QUEUE = 'alivane_offline_queue_v1';
+
+const LEGACY_STORAGE_KEY_USER = 'elarivane_user_v1';
+const LEGACY_STORAGE_KEY_HISTORY = 'elarivane_history_v1';
+const LEGACY_STORAGE_KEY_FRIENDS = 'elarivane_friends_v1';
+const LEGACY_STORAGE_KEY_CHALLENGES = 'elarivane_challenges_v1';
+const LEGACY_STORAGE_KEY_OFFLINE_QUEUE = 'elarivane_offline_queue_v1';
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Load State from LocalStorage with clean fallbacks
+  // Load State from LocalStorage with backward-compatible migration
   const [user, setUser] = useState<UserProfile>(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY_USER);
+      const saved = getStoredItem(STORAGE_KEY_USER, LEGACY_STORAGE_KEY_USER);
       return saved ? JSON.parse(saved) : INITIAL_USER_PROFILE;
     } catch {
       return INITIAL_USER_PROFILE;
@@ -79,7 +89,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const [history, setHistory] = useState<ActivityCompletion[]>(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY_HISTORY);
+      const saved = getStoredItem(STORAGE_KEY_HISTORY, LEGACY_STORAGE_KEY_HISTORY);
       return saved ? JSON.parse(saved) : generateInitialHistory();
     } catch {
       return generateInitialHistory();
@@ -88,7 +98,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const [friends, setFriends] = useState<Friend[]>(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY_FRIENDS);
+      const saved = getStoredItem(STORAGE_KEY_FRIENDS, LEGACY_STORAGE_KEY_FRIENDS);
       return saved ? JSON.parse(saved) : INITIAL_FRIENDS;
     } catch {
       return INITIAL_FRIENDS;
@@ -97,7 +107,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const [challenges, setChallenges] = useState<Challenge[]>(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY_CHALLENGES);
+      const saved = getStoredItem(STORAGE_KEY_CHALLENGES, LEGACY_STORAGE_KEY_CHALLENGES);
       return saved ? JSON.parse(saved) : INITIAL_CHALLENGES;
     } catch {
       return INITIAL_CHALLENGES;
@@ -116,7 +126,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const [offlineQueue, setOfflineQueue] = useState<ActivityCompletion[]>(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY_OFFLINE_QUEUE);
+      const saved = getStoredItem(STORAGE_KEY_OFFLINE_QUEUE, LEGACY_STORAGE_KEY_OFFLINE_QUEUE);
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
@@ -203,13 +213,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       friends,
       challenges,
       exportDate: new Date().toISOString(),
-      appName: 'Elarivane',
+      appName: 'Alivane',
     };
     const blob = new Blob([JSON.stringify(dataToExport, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `elarivane-my-data-${new Date().toISOString().split('T')[0]}.json`;
+    a.download = `alivane-my-data-${new Date().toISOString().split('T')[0]}.json`;
     a.click();
     URL.revokeObjectURL(url);
     showToast('Your complete data package was exported');

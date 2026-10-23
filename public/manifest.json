@@ -1,0 +1,17 @@
+{
+  "name": "Alivane — Real-World Presence & Meaningful Moments",
+  "short_name": "Alivane",
+  "description": "Replace unintentional endless scrolling with enjoyable things to do, make, learn, and share with friends.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b120e",
+  "theme_color": "#0d1410",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

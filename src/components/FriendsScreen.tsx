@@ -50,7 +50,7 @@ export const FriendsScreen: React.FC = () => {
   };
 
   const copyInviteLink = () => {
-    navigator.clipboard.writeText(`https://elarivane.app/invite?u=${user.handle}`);
+    navigator.clipboard.writeText(`https://alivane.app/invite?u=${user.handle}`);
     setCopiedLink(true);
     showToast('Personal invite link copied to clipboard!');
     setTimeout(() => setCopiedLink(false), 3000);
@@ -424,7 +424,7 @@ export const FriendsScreen: React.FC = () => {
                 Transparent Contact Permissions
               </h3>
               <p className="text-xs text-stone-300 leading-relaxed">
-                Elarivane does not upload, sell, or permanently store your address book.
+                Alivane does not upload, sell, or permanently store your address book.
               </p>
             </div>
 
@@ -432,7 +432,7 @@ export const FriendsScreen: React.FC = () => {
               <p className="flex items-start gap-2">
                 <Shield className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                 <span>
-                  <strong>What will be used:</strong> Local device contact matching to check if an email/phone already uses Elarivane.
+                  <strong>What will be used:</strong> Local device contact matching to check if an email/phone already uses Alivane.
                 </span>
               </p>
               <p className="flex items-start gap-2">
