@@ -15,6 +15,10 @@ import {
 import { LabType, LabDefinition } from '../types/experiments';
 import { EcEngineeringLab } from './experiments/EcEngineeringLab';
 import { PhysicsOpticsLab } from './experiments/PhysicsOpticsLab';
+import { AcousticsResonanceLab } from './experiments/AcousticsResonanceLab';
+import { CelestialGravityLab } from './experiments/CelestialGravityLab';
+import { MechanicalRoboticsLab } from './experiments/MechanicalRoboticsLab';
+import { ChemistryMolecularLab } from './experiments/ChemistryMolecularLab';
 
 const LABS_DIRECTORY: LabDefinition[] = [
   {
@@ -40,7 +44,7 @@ const LABS_DIRECTORY: LabDefinition[] = [
     title: 'Acoustics & Wave Resonance Lab',
     subtitle: 'Harmonic Standing Waves & Chladni Nodal Plates',
     category: 'Wave Mechanics',
-    description: 'Explore resonant frequencies, audio wavelength dispersion, and constructive/destructive interference in localized wave chambers.',
+    description: 'Explore resonant frequencies, audio wavelength dispersion, and constructive/destructive interference in localized wave chambers with live Web Audio tone generation.',
     badge: 'Wave Mechanics',
     iconName: 'Radio',
   },
@@ -49,9 +53,27 @@ const LABS_DIRECTORY: LabDefinition[] = [
     title: 'Celestial Mechanics & Gravity Lab',
     subtitle: 'N-Body Keplerian Orbit Integration & Lagrange Points',
     category: 'Cosmology & Orbital Mechanics',
-    description: 'Simulate gravitational multi-body interactions with Euler-Cromer orbital mechanics and escape velocities.',
+    description: 'Simulate gravitational multi-body interactions with Euler-Cromer orbital mechanics, softening parameters, and binary star systems.',
     badge: 'Orbital Solver',
     iconName: 'Compass',
+  },
+  {
+    id: 'mechanical-lab',
+    title: 'Mechanical Engineering & Robotics',
+    subtitle: '2-DOF Robotic Arm Kinematics & Gear Torque Mesh',
+    category: 'Mechanics & Robotics',
+    description: 'Forward kinematics planar manipulator paired with gear ratio mechanical reduction and motor torque dissipation calculations.',
+    badge: 'Kinematics',
+    iconName: 'Layers',
+  },
+  {
+    id: 'chemistry-lab',
+    title: 'Physical Chemistry & Calorimetry Lab',
+    subtitle: 'Stoichiometric Aqueous Reactions & Enthalpy of Neutralization',
+    category: 'Chemical Sciences',
+    description: 'Explore aqueous precipitation, displacement redox, and enthalpy of neutralization using thermodynamic calorimetry models.',
+    badge: 'Calorimetry',
+    iconName: 'Atom',
   },
 ];
 
@@ -92,6 +114,8 @@ export const ExperimentsScreen: React.FC = () => {
             {lab.id === 'optics-lab' && <Eye className="w-4 h-4 text-sky-400" />}
             {lab.id === 'acoustics-lab' && <Radio className="w-4 h-4 text-amber-400" />}
             {lab.id === 'astronomy-lab' && <Compass className="w-4 h-4 text-purple-400" />}
+            {lab.id === 'mechanical-lab' && <Layers className="w-4 h-4 text-teal-400" />}
+            {lab.id === 'chemistry-lab' && <Atom className="w-4 h-4 text-rose-400" />}
             <span>{lab.title}</span>
           </button>
         ))}
@@ -102,37 +126,13 @@ export const ExperimentsScreen: React.FC = () => {
 
       {activeLab === 'optics-lab' && <PhysicsOpticsLab />}
 
-      {activeLab === 'acoustics-lab' && (
-        <div className="bg-[#101b15] border border-emerald-900/60 rounded-3xl p-6 text-center space-y-3">
-          <Radio className="w-10 h-10 text-amber-400 mx-auto" />
-          <h3 className="text-lg font-serif font-bold text-white">Acoustic Resonance Chamber</h3>
-          <p className="text-xs text-stone-300 max-w-md mx-auto">
-            Interactive standing wave node builder with harmonic frequency audio synthesizer. Switch to the 3D Electronics Lab or Optics Bench to explore verified mathematical solvers.
-          </p>
-          <button
-            onClick={() => setActiveLab('ec-lab')}
-            className="px-4 py-2 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold"
-          >
-            Launch 3D EC Laboratory
-          </button>
-        </div>
-      )}
+      {activeLab === 'acoustics-lab' && <AcousticsResonanceLab />}
 
-      {activeLab === 'astronomy-lab' && (
-        <div className="bg-[#101b15] border border-emerald-900/60 rounded-3xl p-6 text-center space-y-3">
-          <Compass className="w-10 h-10 text-purple-400 mx-auto" />
-          <h3 className="text-lg font-serif font-bold text-white">Keplerian Orbital Dynamics</h3>
-          <p className="text-xs text-stone-300 max-w-md mx-auto">
-            N-body gravitation simulation integrated via Verlet algorithm. Calculate orbital velocities, eccentricity, and perihelion points.
-          </p>
-          <button
-            onClick={() => setActiveLab('ec-lab')}
-            className="px-4 py-2 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold"
-          >
-            Launch 3D EC Laboratory
-          </button>
-        </div>
-      )}
+      {activeLab === 'astronomy-lab' && <CelestialGravityLab />}
+
+      {activeLab === 'mechanical-lab' && <MechanicalRoboticsLab />}
+
+      {activeLab === 'chemistry-lab' && <ChemistryMolecularLab />}
     </div>
   );
 };
