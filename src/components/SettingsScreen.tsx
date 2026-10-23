@@ -13,8 +13,11 @@ import {
   Volume2,
   Check,
   AlertTriangle,
+  Layers,
+  ExternalLink,
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { EcosystemDirectoryModal } from './EcosystemDirectoryModal';
 
 export const SettingsScreen: React.FC = () => {
   const {
@@ -31,6 +34,7 @@ export const SettingsScreen: React.FC = () => {
   } = useApp();
 
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [showEcosystem, setShowEcosystem] = useState(false);
 
   return (
     <div className="space-y-6 pb-24 max-w-2xl mx-auto px-4 pt-4 md:pt-6">
@@ -42,6 +46,30 @@ export const SettingsScreen: React.FC = () => {
         <p className="text-xs md:text-sm text-stone-300 mt-1">
           Customize notifications, privacy, offline behavior, and data exports.
         </p>
+      </div>
+
+      {/* ALIVONE ECOSYSTEM HUB LINK */}
+      <div className="bg-[#121c17] border border-emerald-950/80 rounded-3xl p-5 space-y-3 shadow-xl">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-emerald-950 border border-emerald-800/80 flex items-center justify-center text-emerald-300">
+              <Layers className="w-4 h-4" />
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-stone-100">Alivone Ecosystem</h3>
+              <p className="text-xs text-stone-300">
+                Explore connected apps across mindfulness, focus, and creativity.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={() => setShowEcosystem(true)}
+            className="px-3.5 py-1.5 bg-emerald-900/60 hover:bg-emerald-800 border border-emerald-700/60 text-emerald-200 text-xs font-medium rounded-xl flex items-center gap-1.5 transition-colors"
+          >
+            <span>View Network</span>
+            <ExternalLink className="w-3.5 h-3.5" />
+          </button>
+        </div>
       </div>
 
       {/* OFFLINE MODE CONTROLS */}
@@ -286,6 +314,8 @@ export const SettingsScreen: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <EcosystemDirectoryModal isOpen={showEcosystem} onClose={() => setShowEcosystem(false)} />
     </div>
   );
 };

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Sparkles, Footprints, Palette, Compass, ArrowRight, Bookmark, CheckCircle2 } from 'lucide-react';
+import { Sparkles, Footprints, Palette, Compass, ArrowRight, Bookmark, CheckCircle2, Layers } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { ActivityPath } from '../types';
+import { EcosystemDirectoryModal } from './EcosystemDirectoryModal';
 
 interface HomeScreenProps {
   onOpenActivity: (id: string) => void;
@@ -10,6 +11,7 @@ interface HomeScreenProps {
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({ onOpenActivity, onNavigateExplore }) => {
   const { activities, history, isSaved, toggleSaveActivity, user } = useApp();
+  const [showEcosystem, setShowEcosystem] = useState(false);
 
   // Find a prompt for each of the 3 core paths
   const goDoMissions = activities.filter(a => a.path === 'go-do');
@@ -31,9 +33,13 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onOpenActivity, onNaviga
               Alivane Presence
             </span>
           </div>
-          <span className="text-xs text-stone-300 font-serif italic">
-            "Finite, purposeful, easy to leave."
-          </span>
+          <button
+            onClick={() => setShowEcosystem(true)}
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-stone-900/80 hover:bg-stone-800 text-[11px] text-stone-300 border border-stone-800/80 transition-colors"
+          >
+            <Layers className="w-3.5 h-3.5 text-emerald-400" />
+            <span>Alivone Network</span>
+          </button>
         </div>
 
         <div className="space-y-1">
@@ -282,12 +288,24 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onOpenActivity, onNaviga
       </div>
 
       {/* Gentle Footer Reminder */}
-      <div className="text-center py-4 text-xs text-stone-300 border-t border-emerald-950/40 space-y-1">
+      <div className="text-center py-4 text-xs text-stone-300 border-t border-emerald-950/40 space-y-2">
         <p className="flex items-center justify-center gap-1.5 text-stone-300">
           <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
           Finite activities designed for fulfillment, not retention algorithms.
         </p>
+        <p className="text-[11px] text-stone-300">
+          Proud part of the{' '}
+          <button
+            onClick={() => setShowEcosystem(true)}
+            className="text-emerald-400 hover:text-emerald-300 underline font-medium"
+          >
+            Alivone
+          </button>{' '}
+          ecosystem.
+        </p>
       </div>
+
+      <EcosystemDirectoryModal isOpen={showEcosystem} onClose={() => setShowEcosystem(false)} />
     </div>
   );
 };
