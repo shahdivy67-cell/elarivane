@@ -1,8 +1,8 @@
 import React from 'react';
-import { Compass, Sparkles, BrainCircuit, Users, Award, User, Settings, WifiOff } from 'lucide-react';
+import { Compass, Sparkles, BrainCircuit, Users, Award, User, Settings, WifiOff, Cpu } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
-export type NavTab = 'home' | 'explore' | 'friends' | 'progress' | 'profile' | 'settings';
+export type NavTab = 'home' | 'explore' | 'simulators' | 'friends' | 'progress' | 'profile' | 'settings';
 
 interface NavigationProps {
   currentTab: NavTab;
@@ -15,6 +15,7 @@ export const Navigation: React.FC<NavigationProps> = ({ currentTab, onSelectTab 
   const navItems: { id: NavTab; label: string; icon: React.ElementType }[] = [
     { id: 'home', label: 'Home', icon: Compass },
     { id: 'explore', label: 'Explore', icon: Sparkles },
+    { id: 'simulators', label: 'Simulators', icon: Cpu },
     { id: 'friends', label: 'Friends', icon: Users },
     { id: 'progress', label: 'Progress', icon: Award },
     { id: 'profile', label: 'Profile', icon: User },

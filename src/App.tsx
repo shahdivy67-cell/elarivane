@@ -7,6 +7,7 @@ import { FriendsScreen } from './components/FriendsScreen';
 import { ProgressScreen } from './components/ProgressScreen';
 import { ProfileScreen } from './components/ProfileScreen';
 import { SettingsScreen } from './components/SettingsScreen';
+import { SimulatorsScreen } from './components/SimulatorsScreen';
 import { ActivityModal } from './components/ActivityModal';
 import { ActivityPath } from './types';
 import { Sparkles, CheckCircle2 } from 'lucide-react';
@@ -53,6 +54,8 @@ const MainLayout: React.FC = () => {
             initialPathTab={exploreInitialPath}
           />
         )}
+
+        {currentTab === 'simulators' && <SimulatorsScreen />}
 
         {currentTab === 'friends' && <FriendsScreen />}
 
