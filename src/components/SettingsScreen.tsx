@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { EcosystemDirectoryModal } from './EcosystemDirectoryModal';
+import { AlivMembershipBanner } from './AlivMembershipBanner';
 
 export const SettingsScreen: React.FC = () => {
   const {
@@ -47,6 +48,8 @@ export const SettingsScreen: React.FC = () => {
           Customize notifications, privacy, offline behavior, and data exports.
         </p>
       </div>
+
+      <AlivMembershipBanner />
 
       {/* ALIVONE ECOSYSTEM HUB LINK */}
       <div className="bg-[#121c17] border border-emerald-950/80 rounded-3xl p-5 space-y-3 shadow-xl">
