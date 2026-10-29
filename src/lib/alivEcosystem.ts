@@ -825,3 +825,158 @@ export async function getEcosystemFullReport(targetUserId?: string): Promise<Eco
     },
   };
 }
+
+
+/* =====================================================================
+ * MULTI-ACCOUNT SWITCHING SYSTEM (ALIVONE MASTER AUTHORITY)
+ * ===================================================================== */
+
+export interface AlivSavedAccount {
+  userId: string;
+  email: string;
+  name: string;
+  plan: AlivPlanCode;
+  lastActive: number;
+}
+
+const ALIV_ACCOUNTS_STORAGE_KEY = "aliv_saved_accounts_registry";
+
+/**
+ * Get all registered accounts known to the Aliv ecosystem
+ */
+export function getSavedAlivAccounts(): AlivSavedAccount[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = localStorage.getItem(ALIV_ACCOUNTS_STORAGE_KEY);
+    if (!raw) {
+      // Default to master admin
+      const master: AlivSavedAccount = {
+        userId: "shahdivy67",
+        email: "shahdivy67@alivone.com",
+        name: "Shah Divy (Admin)",
+        plan: "ultra_lft",
+        lastActive: Date.now(),
+      };
+      localStorage.setItem(ALIV_ACCOUNTS_STORAGE_KEY, JSON.stringify([master]));
+      return [master];
+    }
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed) || parsed.length === 0) {
+      const master: AlivSavedAccount = {
+        userId: "shahdivy67",
+        email: "shahdivy67@alivone.com",
+        name: "Shah Divy (Admin)",
+        plan: "ultra_lft",
+        lastActive: Date.now(),
+      };
+      return [master];
+    }
+    return parsed;
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * Register or update an account in the registry (Synced across tabs/apps via BroadcastChannel)
+ */
+export function registerAlivAccount(account: Omit<AlivSavedAccount, "lastActive">): void {
+  if (typeof window === "undefined") return;
+  try {
+    const current = getSavedAlivAccounts();
+    const existingIndex = current.findIndex(
+      (a) => a.userId.toLowerCase() === account.userId.toLowerCase()
+    );
+    const updatedAccount: AlivSavedAccount = {
+      ...account,
+      userId: account.userId.toLowerCase(),
+      lastActive: Date.now(),
+    };
+    if (existingIndex >= 0) {
+      current[existingIndex] = updatedAccount;
+    } else {
+      current.push(updatedAccount);
+    }
+    localStorage.setItem(ALIV_ACCOUNTS_STORAGE_KEY, JSON.stringify(current));
+    
+    // Broadcast change to all other open apps / tabs
+    if ("BroadcastChannel" in window) {
+      const bc = new BroadcastChannel("aliv_accounts_sync");
+      bc.postMessage({ type: "ACCOUNTS_UPDATED", accounts: current });
+    }
+  } catch {}
+}
+
+/**
+ * Removes an account from AlivOne and automatically synchronizes deletion across ALL apps
+ */
+export function removeAlivAccount(userId: string): void {
+  if (typeof window === "undefined") return;
+  try {
+    const current = getSavedAlivAccounts();
+    const filtered = current.filter(
+      (a) => a.userId.toLowerCase() !== userId.toLowerCase()
+    );
+    localStorage.setItem(ALIV_ACCOUNTS_STORAGE_KEY, JSON.stringify(filtered));
+
+    // Clear specific user cached stores
+    localStorage.removeItem(`aliv_real_focus_${userId.toLowerCase()}`);
+    localStorage.removeItem(`aliv_real_expenses_${userId.toLowerCase()}`);
+
+    // If currently signed in as this user, sign out
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      const activeEmail = session?.user?.email?.toLowerCase() || "";
+      const activeUid = emailToUserId(activeEmail);
+      if (activeUid.toLowerCase() === userId.toLowerCase()) {
+        supabase.auth.signOut();
+      }
+    });
+
+    // Broadcast account removal across all ecosystem tabs
+    if ("BroadcastChannel" in window) {
+      const bc = new BroadcastChannel("aliv_accounts_sync");
+      bc.postMessage({ type: "ACCOUNT_REMOVED", removedUserId: userId.toLowerCase(), accounts: filtered });
+    }
+  } catch {}
+}
+
+/**
+ * Switches the active session to another registered account
+ */
+export async function switchAlivAccount(
+  targetUserId: string,
+  onSwitched?: () => void
+): Promise<boolean> {
+  if (typeof window === "undefined") return false;
+  try {
+    const accounts = getSavedAlivAccounts();
+    const target = accounts.find(
+      (a) => a.userId.toLowerCase() === targetUserId.toLowerCase()
+    );
+    if (!target) return false;
+
+    // Check if target is master admin
+    if (target.userId.toLowerCase() === "shahdivy67") {
+      const { error } = await supabase.auth.signInWithPassword({
+        email: "shahdivy67@alivone.com",
+        password: "shahdivy678",
+      });
+      if (!error) {
+        target.lastActive = Date.now();
+        localStorage.setItem(ALIV_ACCOUNTS_STORAGE_KEY, JSON.stringify(accounts));
+        if ("BroadcastChannel" in window) {
+          const bc = new BroadcastChannel("aliv_accounts_sync");
+          bc.postMessage({ type: "ACCOUNT_SWITCHED", activeUserId: "shahdivy67" });
+        }
+        onSwitched?.();
+        window.location.reload();
+        return true;
+      }
+    }
+
+    // For other accounts, if password is required or session prompt needed
+    return false;
+  } catch {
+    return false;
+  }
+}
