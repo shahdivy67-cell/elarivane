@@ -155,6 +155,9 @@ export async function purgeAllUsersExceptAdmin(): Promise<void> {
         k.includes("alivfocus_today_minutes") ||
         k.includes("blackquester") ||
         k.includes("mystiety") ||
+        k.includes("chat_") ||
+        k.includes("conversation") ||
+        k.includes("messages") ||
         (k.startsWith("aliv_real_") && !k.includes("shahdivy67"))
       ) {
         localStorage.removeItem(k);
